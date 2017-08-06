@@ -1,14 +1,16 @@
 class TicTacToe
   attr_accessor :player1, :player2, :gameboard, :player1turn
 
-  def initialize
-  	puts "Starting a Game of Tic Tac Toe!"
-  	@player1 = Player.new(1)
-  	@player2 = Player.new(2)
+  def initialize(name1, name2)
+  	@player1 = Player.new(name1)
+  	@player2 = Player.new(name2)
   	@gameboard = GameBoard.new
   	@player1turn = true
+  end
+
+  def play
   	instructions
-  	play
+  	start
   end
 
   def instructions
@@ -19,12 +21,15 @@ class TicTacToe
   	puts "\n\nLet's begin then, #{@player1.name} and #{@player2.name}!\n\n"
   end
 
-  def play
-  	while gameboard.win == false
+  def start
+  	turns = 0
+  	while gameboard.win == false && turns < 9
   		next_turn
   		switch_turns
+  		gameboard.check_for_win
+  		turns += 1
   	end
-  	someone_won
+  	turns > 8 ? draw : someone_won
   end
 
   def switch_turns
@@ -39,25 +44,37 @@ class TicTacToe
   	puts @player1turn ? "#{player2.name} has won! Suck it, #{player1.name}!" : "#{player1.name} has won! Suck it, #{player2.name}!"
   end
 
+  def draw
+  	puts "It's a draw. You both suck! Haha!"
+  end
+
 
   class Player
-  	attr_accessor :name
+  	attr_accessor :name, :selected_values
 
-    def initialize(number)
-      print "Hello, Player #{number}! What should we call you?\n> "
-      @name = gets.chomp
-      puts "\n"
+    def initialize(name)
+      @name = name
+      @@selected_values = []
     end
 
     def turn
+      prompt
+      get_position
+    end
+
+    def prompt
       puts "It's #{name}'s turn now!"
       print "Which position do you want to mark?\n> "
+    end
+
+    def get_position
       position = gets.chomp.downcase
-      while !position.match(/^[a-i]$/)
+      while !position.match(/^[a-i]$/) || @@selected_values.include?(position)
       	print "Try again! That is not an acceptable input!\n> "
       	position = gets.chomp
       end
       puts "\n"
+      @@selected_values << position
       position
     end
   end
@@ -80,7 +97,6 @@ class TicTacToe
   	    end
   	  end
   	  print "\n\n"
-  	  check_for_win
   	end
 
   	def update_with(position, turn=false)
@@ -93,7 +109,6 @@ class TicTacToe
   	end
 
   	def check_for_win
-  	  # 0,1,2 and 3,4,5 and 6,7,8 and 0,3,6 and 1,4,7 and 2,5,8 and 0,4,8 and 2,4,6
   	  @win = true if values[0] == values[1] && values[1] == values[2]
   	  @win = true if values[3] == values[4] && values[4] == values[5]
   	  @win = true if values[6] == values[7] && values[7] == values[8]
@@ -106,27 +121,17 @@ class TicTacToe
   end
 end
 
-game = TicTacToe.new
 
 
 
+def get_player_name(number)
+      print "Hello, Player #{number}! What should we call you?\n> "
+      @name = gets.chomp
+      puts "\n"
+      @name
+end
 
 
-
-
-
-=begin
-Class Tic-Tac-Toe
-	Class GameBoard
-		initialize method that creates two players
-		display method that uses the @instancevariables to help display, checks for win conditions
-		9 @instancevariables for each position
-		change method that lets the player change an @instance variable
-		winning method that is called by the display method if win conditions are met, displays the victory board, tells players the game is done (by setting their turn boolean to false)
-	Class Player
-		initialize method that prompts the player for their name
-		@instancevariable regarding whether it is the player's turn
-		@@classvariable to track the number of players
-=end
-
-
+puts "Starting a Game of Tic Tac Toe!"
+game = TicTacToe.new(get_player_name(1), get_player_name(2))
+game.play
