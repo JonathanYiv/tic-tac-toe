@@ -1,7 +1,15 @@
-This is a tic-tac-toe game on the command line where two players can play against each other and the board is displayed in between turns.
+# Tic-Tac-Toe Project
 
-Instructions for Usage:
-1. Open your Terminal. Type in the following:
-2. $ git clone https://github.com/JonathanYiv/tic-tac-toe.git
-3. $ cd tic-tac-toe
-4. $ ruby tic-tac-toe.rb
+Check out my command line version of the game [Tic-Tac-Toe](https://en.wikipedia.org/wiki/Tic-tac-toe) built with Ruby!
+
+This is a project from [The Odin Project](https://www.theodinproject.com/courses/ruby-programming/lessons/oop).
+
+![Tic-Tac-Toe](https://opengameart.org/sites/default/files/board_0.png)
+
+## Installation
+Open your Terminal/Command Line. Navigate to the directory where your version will live. Type in the following:
+```
+$ git clone https://github.com/JonathanYiv/tic-tac-toe.git
+$ cd tic-tac-toe
+$ ruby tictactoe.rb
+```
