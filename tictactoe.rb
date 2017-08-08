@@ -71,7 +71,7 @@ class TicTacToe
       position = gets.chomp.downcase
       while !position.match(/^[a-i]$/) || @@selected_values.include?(position)
       	print "Try again! That is not an acceptable input!\n> "
-      	position = gets.chomp
+      	position = gets.chomp.downcase
       end
       puts "\n"
       @@selected_values << position

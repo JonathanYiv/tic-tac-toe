@@ -13,3 +13,7 @@ $ git clone https://github.com/JonathanYiv/tic-tac-toe.git
 $ cd tic-tac-toe
 $ ruby tictactoe.rb
 ```
+
+## Post-Project Thoughts
+
+1. @benjaminpetersen found an error where after an incorrect input, it no longer took capitalized letters. This was easily solved by adding #downcase to a variable.
