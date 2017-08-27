@@ -9,6 +9,7 @@ class TicTacToe
   end
 
   def play
+    @gameboard.display
   	instructions
   	start
   end
@@ -38,6 +39,7 @@ class TicTacToe
 
   def next_turn
   	@player1turn ? @gameboard.update_with(player1.turn, @player1turn) : @gameboard.update_with(player2.turn)
+    @gameboard.display
   end
 
   def someone_won
@@ -85,7 +87,6 @@ class TicTacToe
   	def initialize
   	  @values = %w(a b c d e f g h i)
   	  @win = false
-  	  display
   	end
 
   	def display
@@ -103,7 +104,6 @@ class TicTacToe
   	  @values.each_with_index do |value, index|
   	  	if value == position 
   	  	  @values[index] = turn ? "X" : "O"
-  	  	  display
   	  	end 
   	  end
   	end
@@ -124,14 +124,4 @@ end
 
 
 
-def get_player_name(number)
-      print "Hello, Player #{number}! What should we call you?\n> "
-      @name = gets.chomp
-      puts "\n"
-      @name
-end
 
-
-puts "Starting a Game of Tic Tac Toe!"
-game = TicTacToe.new(get_player_name(1), get_player_name(2))
-game.play
