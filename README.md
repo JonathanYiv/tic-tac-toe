@@ -4,7 +4,7 @@ Check out my command line version of the game [Tic-Tac-Toe](https://en.wikipedia
 
 This is a project from [The Odin Project](https://www.theodinproject.com/courses/ruby-programming/lessons/oop).
 
-![Tic-Tac-Toe](../tictactoe.png)
+![Tic-Tac-Toe](tictactoe.png)
 
 ## Installation
 Open your Terminal/Command Line. Navigate to the directory where your version will live. Type in the following:
